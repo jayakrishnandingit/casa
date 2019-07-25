@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/casa.css' %}">
+
+    <title>{% block title %}{% endblock %}Jayakrishnan Damodaran - Full-stack Python Developer</title>
+  </head>
+  <body>
+    {% block header %}
+      {% include "partials/_navbar.html" %}
+    {% endblock %}
+    {% block content %}{% endblock %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/fontawesome/all.min.js' %}"></script>
+    {% block extra_script %}{% endblock %}
+  </body>
+</html>
