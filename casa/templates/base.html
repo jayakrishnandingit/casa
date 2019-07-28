@@ -17,8 +17,12 @@
     {% block header %}
       {% include "partials/_navbar.html" %}
     {% endblock %}
-    {% block content %}{% endblock %}
-
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    {% block footer %}
+      {% include "partials/_footer.html" %}
+    {% endblock %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>

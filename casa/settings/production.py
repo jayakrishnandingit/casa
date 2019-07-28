@@ -13,6 +13,8 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')  # TODO: move to AWS S3.
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')  # TODO: move to AWS S3.
 # append an md5 hash to the static files to bust cache.
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+CONTACT_EMAIL = "jayakrishnandamodaran@gmail.com"

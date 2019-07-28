@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div class="card border-light text-center">
-        <div class="card-body">
-          <h5 class="card-title">About me</h5>
+      <div class="card border-light">
+        <div id="about-me" class="card-body">
+          <h5 class="card-title text-center">About me</h5>
           <p class="card-text">
             <div class="d-flex flex-row justify-content-around font-weight-lighter font-italic text-muted">
               <div>Looking for&nbsp;<span class="badge badge-info">Full-time</span>&nbsp;jobs</div>
@@ -11,18 +11,20 @@
             </div>
           </p>
           <p class="card-text">
-            I am a Python developer and a Computer Science graduate with 8 years of experience in developing web applications using Django or Flask frameworks. I have hands-on experience in developing containerized applications using Docker, creating and implementing REST APIs, working with RDBMS and integrating third party services like AWS and Stripe. I always keep code in a version control primarily using Git.
+            I am a Python developer and a Computer Science graduate with 8 years of experience in developing web applications using Django or Flask frameworks. I have hands-on experience in developing <span class="font-italic font-weight-bold font-weight-bold">containerized</span> applications using <span class="font-italic font-weight-bold font-weight-bold">Docker</span>, creating and implementing <span class="font-italic font-weight-bold">REST APIs</span>, working with <span class="font-italic font-weight-bold">RDBMS</span> and integrating third party services like AWS and Stripe. I always keep code in a version control primarily using <span class="font-italic font-weight-bold">Git</span>.
           </p>
           <p class="card-text">
-            In addition to that, I have extensively used jQuery, CSS3 and HTML to design intuitive and responsive UI like this website. Moreover, I used ReactJS in my personal projects so as to learn it.
+            In addition to that, I have extensively used jQuery, CSS3 and HTML to design <span class="font-italic font-weight-bold">intuitive and responsive UI</span> like this website. Moreover, I used ReactJS in my personal projects so as to learn it.
           </p>
           <p class="card-text">
-            Furthermore, I am a passionate programmer and a quick learner with an eye for latest technologies. I have good communication skills in English and have always worked collaboratively in teams to achieve common goals.
+            Furthermore, I am a passionate programmer and a quick learner with an eye for latest technologies. I am a <span class="font-italic font-weight-bold">team player</span> with <span class="font-italic font-weight-bold">good communication skills in English</span> and have always worked collaboratively in teams to achieve common goals.
           </p>
           <p class="card-text">
-            Overall, I am a friendly person with a can-do attitude who is loyal to the organization and strives to give the best effort for the significant improvement of the work entrusted. I am looking for an opportunity to build innovative products in a fast paced and internationally oriented company alongside a team who love what they do as much as I do.
+            Overall, I am a friendly person with a can-do attitude who is loyal to the organization and strives to give the best effort towards timely completion of entrusted work and the significant improvement of the company. I am looking for an opportunity to build innovative products in a <span class="font-italic font-weight-bold">fast paced and internationally oriented company</span> alongside a team who love what they do as much as I do.
           </p>
-          <a href="#" class="btn btn-primary">Download Resume</a>
+          <div class="text-center">
+            {% include "partials/_cta.html" %}
+          </div>
         </div>
       </div>
     </div>

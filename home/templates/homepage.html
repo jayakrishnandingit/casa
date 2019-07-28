@@ -6,16 +6,10 @@
         <h1 class="display-4">Jayakrishnan Damodaran</h1>
         <p class="lead">Full-stack Python/Django/Flask web developer.</p>
         <hr class="my-4">
-        <a class="btn btn-secondary btn-lg" target="_casa_github" href="{% url 'redirect_to' 'github' %}" role="button">
-            <i class="fab fa-github"></i>&nbsp;GitHub
-        </a>
-        <a class="btn btn-info btn-lg" target="_casa_linkedin" href="{% url 'redirect_to' 'linkedin' %}" role="button">
-            <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
-        </a>
-        <a class="btn btn-success btn-lg" target="_casa_medium" href="{% url 'redirect_to' 'medium' %}" role="button">
-            <i class="fab fa-medium"></i>&nbsp;Medium
-        </a>
+        {% include "partials/_social_media.html" with btn_size="btn-lg" %}
       </div>
     </div>
     {% include "partials/_about.html" %}
+    {% include "partials/_skills.html" %}
+    {% include "partials/_contact.html" %}
 {% endblock %}

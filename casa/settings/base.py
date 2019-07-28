@@ -61,6 +61,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'casa.common.context_processors.contact_details'
             ],
         },
     },
@@ -124,3 +125,5 @@ STATICFILES_DIRS = [
 GITHUB_URL = os.environ.get('GITHUB_URL')
 LINKEDIN_URL = os.environ.get('LINKEDIN_URL')
 MEDIUM_URL = os.environ.get('MEDIUM_URL')
+
+CONTACT_EMAIL = ""

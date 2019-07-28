@@ -1,3 +1,11 @@
+main.fixed-top > .container {
+    padding-top: 60px; /* a fixed navbar constraint. */
+}
+
+footer {
+    background-color: #f5f5f5;
+}
+
 .bg-jumbotron {
     background-color: #e9ecef;
 }
