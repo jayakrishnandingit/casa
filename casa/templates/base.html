@@ -28,6 +28,9 @@
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/fontawesome/all.min.js' %}"></script>
+    {% if CAPTCHA_PUBLIC_KEY %}
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    {% endif %}
     {% block extra_script %}{% endblock %}
   </body>
 </html>

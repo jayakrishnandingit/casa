@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 
+
 # Create your models here.
 class Timestamp(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)

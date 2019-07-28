@@ -3,6 +3,7 @@ FROM python:3.7
 
 # Set environment varibles for build.
 ENV PYTHONUNBUFFERED 1
+ENV DJANGO_ENV dev
 
 RUN apt-get clean \
     && apt-get update -y \
@@ -18,7 +19,7 @@ RUN apt-get clean \
 # Set the working directory to /code/
 WORKDIR /code/
 
-COPY requirements.txt requirements.txt
+COPY requirements_$DJANGO_ENV.txt requirements.txt
 RUN pip install --upgrade pip
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt

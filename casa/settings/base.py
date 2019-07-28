@@ -61,7 +61,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'casa.common.context_processors.contact_details'
+                'casa.common.context_processors.contact_details',
+                'casa.common.context_processors.secret',
             ],
         },
     },
@@ -121,9 +122,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
 ]
+MEDIA_URL = '/uploads/'
 
 GITHUB_URL = os.environ.get('GITHUB_URL')
 LINKEDIN_URL = os.environ.get('LINKEDIN_URL')
 MEDIUM_URL = os.environ.get('MEDIUM_URL')
 
 CONTACT_EMAIL = ""
+
+CAPTCHA_PUBLIC_KEY = os.environ.get("CAPTCHA_PUBLIC_KEY")
+CAPTCHA_SECRET_KEY = os.environ.get("CAPTCHA_SECRET_KEY")
