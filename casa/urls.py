@@ -23,7 +23,7 @@ from home import views as home_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.HomePage.as_view(), name='home'),
-    path('redirect-to/<str:external_site_name>/', home_views.RedirectorView.as_view(), name='redirect_to')
+    path('redirect-to/<str:external_site_name>/', home_views.RedirectorView.as_view(), name='redirect_to'),
     path('download-resume/', home_views.ResumeDownloadView.as_view(), name='resume_download')
 ]
 

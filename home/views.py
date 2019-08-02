@@ -3,9 +3,11 @@ import json
 import urllib
 import mimetypes
 
-from django.conf import settings
-from django.shortcuts import render
 from django import http
+from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 
@@ -31,19 +33,19 @@ class RedirectorView(View):
         return Redirector(request).redirect()
 
 
-def ResumeDownloadView(View):
+class ResumeDownloadView(View):
     #TODO: Not tested.
     template_name = 'resume_form.html'
 
     def get(self, request):
-        return render(self.template_name)
+        return render(request, self.template_name)
 
     def post(self, request):
         if settings.CAPTCHA_PUBLIC_KEY:
             return self.validate_captcha_and_download(request)
         return download(request)
 
-    def validate_captcha_and_download(self, request)
+    def validate_captcha_and_download(self, request):
         recaptcha_response = request.POST.get('g-recaptcha-response')
         url = 'https://www.google.com/recaptcha/api/siteverify'
         values = {
@@ -51,8 +53,12 @@ def ResumeDownloadView(View):
             'response': recaptcha_response
         }
         data = urllib.parse.urlencode(values).encode()
-        req =  urllib.request.Request(url, data=data)
-        response = urllib.request.urlopen(req)
+        try:
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+        except Exception as e:
+            messages.error(request, "We are unable to process the request at the moment.")
+            return render(self.template_name)
         result = json.loads(response.read().decode())
         if not result['success']:
             messages.error(request, 'Invalid reCAPTCHA. Please try again.')
@@ -62,6 +68,7 @@ def ResumeDownloadView(View):
     def download(self, request):
         resume = FileUpload.objects.filter(category__name='resume').first()
         if resume is None:
+            messages.error(request, "File not found. Try again later.")
             return http.HttpResponseNotFound('File not found.')
         file_url = resume.uploaded_file.url
         # TODO: not sure if this will work in production where we plan to use AWS S3.

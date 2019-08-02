@@ -1,0 +1,40 @@
+{% load static %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="card border-light">
+            <div class="card-body">
+                <h5 class="card-title text-center">Portfolio</h5>
+                <div class="card">
+                    <img src="{% static 'img/sitiata_home.png' %}" class="card-img-top" alt="Sitiata">
+                    <div class="card-body">
+                        <h6 class="card-title text-center">
+                            <a href="http://bit.ly/31d9ITx">Sitiata</a>
+                        </h6>
+                        <p class="card-text">
+                            Sitiata is a complete solution for tracking billable hours, organizing tasks and billing the work done. The project was developed using <b>Python2.7</b>, <b>Django1.11</b>, <b>PostgreSQL9.1</b> and <b>jQuery</b>. Some of the major contributions I made are,
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Revamped time tracking functionality which significantly reduced bugs and increased reliability.
+                                </li>
+                                <li class="list-group-item">
+                                    Implemented a Kanban board with drag 'n' drop from ground up and provided an easier interface to manage tasks.
+                                </li>
+                                <li class="list-group-item">
+                                    Integrated <b>AWS S3</b> to store user uploaded images that helped reduce server load considerably.
+                                </li>
+                                <li class="list-group-item">
+                                    Added static file caching using CloudFlare service which substantially reduced page load latency.
+                                </li>
+                                <li class="list-group-item">
+                                    Implemented an invoicing service which along with Reports increased the efficiency of billing.
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

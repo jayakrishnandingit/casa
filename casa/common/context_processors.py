@@ -9,5 +9,5 @@ def contact_details(request):
 
 def secrets(request):
     return {
-        'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY
+        'CAPTCHA_PUBLIC_KEY': settings.CAPTCHA_PUBLIC_KEY
     }

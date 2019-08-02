@@ -62,7 +62,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'casa.common.context_processors.contact_details',
-                'casa.common.context_processors.secret',
+                'casa.common.context_processors.secrets',
             ],
         },
     },

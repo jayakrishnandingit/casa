@@ -20,7 +20,7 @@ class FileCategory(Timestamp):
 class FileUpload(Timestamp):
     name = models.CharField(max_length=200, null=False, blank=False)
     category = models.OneToOneField(FileCategory, related_name='files', on_delete=models.SET_NULL)
-    uploaded_file = models.FileField(upload_to='resume/')
+    uploaded_file = models.FileField(upload_to='files/')
 
     def __str__(self):
         return '%s - %s' % (self.name, self.category)

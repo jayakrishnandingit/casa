@@ -6,10 +6,13 @@
         <h1 class="display-4">Jayakrishnan Damodaran</h1>
         <p class="lead">Full-stack Python/Django/Flask web developer.</p>
         <hr class="my-4">
-        {% include "partials/_social_media.html" with btn_size="btn-lg" %}
+        <div class="d-flex flex-row justify-content-around font-weight-lighter font-italic text-muted">
+            {% include "partials/_social_media.html" with btn_size="btn-lg" %}
+        </div>
       </div>
     </div>
     {% include "partials/_about.html" %}
     {% include "partials/_skills.html" %}
+    {% include "partials/_work.html" %}
     {% include "partials/_contact.html" %}
 {% endblock %}
