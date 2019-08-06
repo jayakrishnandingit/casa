@@ -18,6 +18,7 @@
       {% include "partials/_navbar.html" %}
     {% endblock %}
     <main>
+      {% include "partials/_flash_messages.html" %}
       {% block content %}{% endblock %}
     </main>
     {% block footer %}

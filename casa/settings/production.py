@@ -3,6 +3,10 @@ from base import *
 
 DEBUG = False
 
+ALLOWED_HOSTS = []
+
+BASE_URL = 'http://' + ALLOWED_HOSTS[0]
+
 INSTALLED_APPS += [
     'storages'
 ]
@@ -17,9 +21,6 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')  # TODO: move to AWS S3.
-# append an md5 hash to the static files to bust cache.
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 CONTACT_EMAIL = "jayakrishnandamodaran@gmail.com"
 
@@ -30,4 +31,7 @@ AWS_S3_FILE_OVERWRITE = True
 AWS_DEFAULT_ACL = None  # some issues with original default public-read reported by storages.
 AWS_S3_ENCRYPTION = True
 
+# static file.
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# media file.
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

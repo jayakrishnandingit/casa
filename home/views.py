@@ -1,7 +1,7 @@
 import os
-import json
-import urllib
+import logging
 import mimetypes
+import requests
 
 from django import http
 from django.conf import settings
@@ -13,6 +13,8 @@ from django.views.generic import TemplateView
 
 from .models import FileUpload
 from .utils import RedirectorFactory
+
+LOGGER = logging.getLogger(__name__)
 
 
 # Create your views here.
@@ -43,27 +45,36 @@ class ResumeDownloadView(View):
     def post(self, request):
         if settings.CAPTCHA_PUBLIC_KEY:
             return self.validate_captcha_and_download(request)
-        return download(request)
+        return self.download(request)
 
     def validate_captcha_and_download(self, request):
+        if self.validate_captcha(request):
+            return self.download(request)
+        return render(request, self.template_name)
+        
+    def validate_captcha(self, request):
         recaptcha_response = request.POST.get('g-recaptcha-response')
         url = 'https://www.google.com/recaptcha/api/siteverify'
         values = {
             'secret': settings.CAPTCHA_SECRET_KEY,
             'response': recaptcha_response
         }
-        data = urllib.parse.urlencode(values).encode()
         try:
-            req =  urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
+            LOGGER.info("Validating captcha.")
+            response =  requests.post(url, data=values)
         except Exception as e:
             messages.error(request, "We are unable to process the request at the moment.")
-            return render(self.template_name)
-        result = json.loads(response.read().decode())
+            LOGGER.error(e)
+            return False
+        if response.status_code != 200:
+            messages.error(request, "We are unable to process the request at the moment.")
+            LOGGER.error(e)
+            return False
+        result = response.json()
         if not result['success']:
             messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-            return render(self.template_name)
-        return download(request)
+            return False
+        return True
 
     def download(self, request):
         resume = FileUpload.objects.filter(category__name='resume').first()
@@ -73,7 +84,19 @@ class ResumeDownloadView(View):
         file_url = resume.uploaded_file.url
         # TODO: not sure if this will work in production where we plan to use AWS S3.
         # TODO: Testing required. Do we need to pass AWS keys as headers?
-        file_content = urllib.request.urlopen(file_url).read().decode()
+        try:
+            LOGGER.info("Going to download file from the URL %s.", file_url)
+            response = requests.get(settings.BASE_URL + file_url)
+        except Exception as e:
+            messages.error(request, "File cannot be downloaded. Please try after sometime.")
+            LOGGER.error(e)
+            return http.HttpResponseNotFound('File not found.')
+        if response.status_code != 200:
+            messages.error(request, "File cannot be downloaded. Please try after sometime.")
+            LOGGER.error(e)
+            return http.HttpResponseNotFound('File not found.')
+
+        file_content = response.raw.read()
         response = http.HttpResponse(file_content)
         response['Content-Type'] = mimetypes.guess_type(file_url)
         response['Content-Disposition'] = 'attachement; filename=%s' % resume.name

@@ -16,20 +16,24 @@ RUN apt-get clean \
         libpq-dev \
         mmdb-bin
 
+# upgrade pip to the latest version.
+RUN pip install --upgrade pip
+# install gunicorn WSGI server.
+RUN pip install gunicorn
+
 # Set the working directory to /code/
 WORKDIR /code/
 
-COPY requirements_$DJANGO_ENV.txt requirements.txt
-RUN pip install --upgrade pip
-# Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
-RUN pip install gunicorn
+COPY requirements requirements/
+# Install required python packages.
+RUN pip install -r requirements/$DJANGO_ENV.txt
 
 ADD GeoLite2-City_20190716.tar.gz geodata/
 ADD GeoLite2-Country_20190716.tar.gz geodata/
 
 # Copy the current directory contents into the container at /code/
 COPY manage.py .
+COPY start.sh .
 COPY casa casa/
 COPY home home/
 COPY activity activity/
@@ -39,4 +43,4 @@ RUN chown -R jay /code
 USER jay
 
 EXPOSE 8000
-CMD exec gunicorn casa.wsgi:application --bind 0.0.0.0:8000 --workers 3
+CMD ["sh", "start.sh"]
