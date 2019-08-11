@@ -118,11 +118,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
 ]
-MEDIA_URL = '/uploads/'
 
 GITHUB_URL = os.environ.get('GITHUB_URL')
 LINKEDIN_URL = os.environ.get('LINKEDIN_URL')

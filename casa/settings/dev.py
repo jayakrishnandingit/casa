@@ -14,7 +14,9 @@ INSTALLED_APPS += [
     'debug_toolbar'
 ]
 
-INTERNAL_IPS = ALLOWED_HOSTS + ['0.0.0.0']
+INTERNAL_IPS = [
+    '127.0.0.1'
+]
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -33,7 +35,9 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ] + MIDDLEWARE
 
+STATIC_URL = f'http://{BASE_URL}/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = f'http://{BASE_URL}/uploads/'
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'uploads')
 
 GEOIP_PATH = os.path.join(BASE_DIR, 'geodata', 'GeoLite2-City_20190716', 'GeoLite2-City.mmdb')

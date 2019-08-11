@@ -86,7 +86,7 @@ class ResumeDownloadView(View):
         # TODO: Testing required. Do we need to pass AWS keys as headers?
         try:
             LOGGER.info("Going to download file from the URL %s.", file_url)
-            response = requests.get(settings.BASE_URL + file_url)
+            response = requests.get(file_url)
         except Exception as e:
             messages.error(request, "File cannot be downloaded. Please try after sometime.")
             LOGGER.error(e)
