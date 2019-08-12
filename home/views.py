@@ -81,23 +81,16 @@ class ResumeDownloadView(View):
         if resume is None:
             messages.error(request, "File not found. Try again later.")
             return http.HttpResponseNotFound('File not found.')
-        file_url = resume.uploaded_file.url
-        # TODO: not sure if this will work in production where we plan to use AWS S3.
-        # TODO: Testing required. Do we need to pass AWS keys as headers?
-        try:
-            LOGGER.info("Going to download file from the URL %s.", file_url)
-            response = requests.get(file_url)
-        except Exception as e:
-            messages.error(request, "File cannot be downloaded. Please try after sometime.")
-            LOGGER.error(e)
-            return http.HttpResponseNotFound('File not found.')
-        if response.status_code != 200:
-            messages.error(request, "File cannot be downloaded. Please try after sometime.")
-            LOGGER.error(e)
-            return http.HttpResponseNotFound('File not found.')
 
-        file_content = response.raw.read()
-        response = http.HttpResponse(file_content)
-        response['Content-Type'] = mimetypes.guess_type(file_url)
-        response['Content-Disposition'] = 'attachement; filename=%s' % resume.name
+        LOGGER.info(f"Downloading the file {resume.uploaded_file.url}.")
+        response = http.HttpResponse(resume.uploaded_file.read())
+        # TODO: content type and extension is not parsed correctly.
+        file_extension = ""
+        content_type, encoding = mimetypes.guess_type(resume.uploaded_file.url)
+        if content_type:
+            LOGGER.info(f"Content type found is {content_type}.")
+            response['Content-Type'] = content_type
+            file_extension = mimetypes.guess_extension(content_type)
+        filename = f"{resume.name}{file_extension}"
+        response['Content-Disposition'] = 'attachement; filename=%s' % filename
         return response

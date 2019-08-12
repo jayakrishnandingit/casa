@@ -35,11 +35,6 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ] + MIDDLEWARE
 
-STATIC_URL = f'http://{BASE_URL}/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_URL = f'http://{BASE_URL}/uploads/'
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'uploads')
-
 GEOIP_PATH = os.path.join(BASE_DIR, 'geodata', 'GeoLite2-City_20190716', 'GeoLite2-City.mmdb')
 
 CONTACT_EMAIL = "jayakrishnandamodaran@gmail.com"
@@ -71,5 +66,15 @@ LOGGING = {
             'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': True
         },
+        'casa': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'home': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
+        }
     },
 }

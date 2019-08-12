@@ -24,7 +24,6 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -34,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'activity',
     'home',
 ]
@@ -121,6 +121,22 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
 ]
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_FILE_OVERWRITE = True
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_ENCRYPTION = True
+AWS_S3_REGION_NAME = 'ap-south-1'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# static file.
+STATICFILES_STORAGE = 'casa.storage_backends.CasaS3StaticStorage'
+AWS_STATIC_LOCATION = 'static'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_STATIC_LOCATION}/'
+# media file.
+DEFAULT_FILE_STORAGE = 'casa.storage_backends.CasaS3MediaStorage'
+AWS_MEDIA_LOCATION = 'uploads'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_MEDIA_LOCATION}/'
 
 GITHUB_URL = os.environ.get('GITHUB_URL')
 LINKEDIN_URL = os.environ.get('LINKEDIN_URL')
