@@ -146,3 +146,5 @@ CONTACT_EMAIL = ""
 
 CAPTCHA_PUBLIC_KEY = os.environ.get("CAPTCHA_PUBLIC_KEY")
 CAPTCHA_SECRET_KEY = os.environ.get("CAPTCHA_SECRET_KEY")
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'geodata', 'GeoLite2-City_20190716', 'GeoLite2-City.mmdb')

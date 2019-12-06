@@ -4,9 +4,12 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
-
-BASE_URL = 'http://' + ALLOWED_HOSTS[0]
+ALLOWED_HOSTS = [
+    '13.234.48.54',
+    'ec2-13-234-48-54.ap-south-1.compute.amazonaws.com',
+    'jayakrishnandamodaran.com',
+    'www.jayakrishnandamodaran.com'
+]
 
 DATABASES = {
     'default': {
@@ -18,11 +21,10 @@ DATABASES = {
     }
 }
 
-GEOIP_PATH = os.path.join(BASE_DIR, 'geodata', 'GeoLite2-City_20190716', 'GeoLite2-City.mmdb')
-
 CONTACT_EMAIL = "jayakrishnandamodaran@gmail.com"
 
 CHAT_ENABLED = False
+RESUME_DOWNLOAD_ALLOWED = False
 
 LOGGING = {
     'version': 1,
@@ -41,33 +43,21 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
-        },
-        'info_file_handler': {
-            'class': 'logging.RotatingFileHanler',
-            'formatter': 'verbose',
-            'file': '/var/log/casa_info.log',
-            'level': 'INFO'
-        },
-        'error_file_handler': {
-            'class': 'logging.RotatingFileHanler',
-            'formatter': 'verbose',
-            'file': '/var/log/casa_error.log',
-            'level': 'ERROR'
         }
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'info_file_handler', 'error_file_handler'],
+            'handlers': ['console'],
             'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': False
         },
         'casa': {
-            'handlers': ['console', 'info_file_handler', 'error_file_handler'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False
         },
         'home': {
-            'handlers': ['console', 'info_file_handler', 'error_file_handler'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False
         }

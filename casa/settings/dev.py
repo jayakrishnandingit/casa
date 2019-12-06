@@ -7,8 +7,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-BASE_URL = 'http://localhost:8000'
-
 # TODO: debug toolbar not working.
 INSTALLED_APPS += [
     'debug_toolbar'
@@ -34,8 +32,6 @@ DATABASES = {
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ] + MIDDLEWARE
-
-GEOIP_PATH = os.path.join(BASE_DIR, 'geodata', 'GeoLite2-City_20190716', 'GeoLite2-City.mmdb')
 
 CONTACT_EMAIL = "jayakrishnandamodaran@gmail.com"
 
