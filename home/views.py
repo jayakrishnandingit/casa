@@ -1,4 +1,3 @@
-import os
 import logging
 import mimetypes
 import requests
@@ -6,35 +5,16 @@ import requests
 from django import http
 from django.conf import settings
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView
 
 from .models import FileUpload
-from .utils import RedirectorFactory
 
 LOGGER = logging.getLogger(__name__)
 
 
 # Create your views here.
-class HomePage(TemplateView):
-    template_name = 'homepage.html'
-
-
-class RedirectorView(View):
-    def get(self, request, external_site_name):
-        sites = {'github', 'linkedin', 'medium'}
-        if external_site_name not in sites:
-            return http.HttpResponseBadRequest("Bad request.")
-
-        Redirector = RedirectorFactory.get_class(external_site_name)
-        if Redirector is None:
-            return http.HttpResponseBadRequest("Bad request.")
-
-        return Redirector(request).redirect()
-
-
 class ResumeDownloadView(View):
     #TODO: Not tested.
     template_name = 'resume_form.html'

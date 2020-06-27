@@ -14,7 +14,16 @@ RUN apt-get clean \
         libmaxminddb-dev \
         libmaxminddb0 \
         libpq-dev \
-        mmdb-bin
+        mmdb-bin \
+        libtiff5-dev \
+        libjpeg62-turbo-dev \
+        libopenjp2-7-dev \
+        zlib1g-dev \
+        libfreetype6-dev \
+        liblcms2-dev \
+        libwebp-dev \
+        tcl8.6-dev \
+        tk8.6-dev
 
 # upgrade pip to the latest version.
 RUN pip install --upgrade pip

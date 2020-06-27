@@ -14,21 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.conf import settings
-
-from home import views as home_views
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_views.HomePage.as_view(), name='home'),
-    path('redirect-to/<str:external_site_name>/', home_views.RedirectorView.as_view(), name='redirect_to'),
-    path('download-resume/', home_views.ResumeDownloadView.as_view(), name='resume_download')
+    re_path(r'^cms-dashboard/', include(wagtailadmin_urls)),
+    re_path(r'', include(wagtail_urls)),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
 
-    urlpatterns += [
+    urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
-    ]
+    ] + urlpatterns

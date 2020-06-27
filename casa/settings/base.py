@@ -33,9 +33,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
     'storages',
+
     'activity',
-    'home',
+    'home'
 ]
 
 MIDDLEWARE = [
@@ -46,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'casa.urls'
@@ -148,3 +164,5 @@ CAPTCHA_PUBLIC_KEY = os.environ.get("CAPTCHA_PUBLIC_KEY")
 CAPTCHA_SECRET_KEY = os.environ.get("CAPTCHA_SECRET_KEY")
 
 GEOIP_PATH = os.path.join(BASE_DIR, 'geodata', 'GeoLite2-City_20190716', 'GeoLite2-City.mmdb')
+
+WAGTAIL_SITE_NAME = 'Jayakrishnan Damodaran - Software Engineer'
