@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card border-light text-center">
+        <div class="card-body">
+          <h5 class="card-title">Skills</h5>
+          <div class="list-group text-center">
+            {% regroup skills by category.name as skills_by_category %}
+            {% for category in skills_by_category %}
+              <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{category.grouper|title}}</h5>
+                </div>
+                <p class="mb-1">
+                  {% for skill in category.list %}
+                    <span class="badge badge-secondary p-3">{{skill.name}}</span>{% if not forloop.last %}&nbsp;{% endif %}
+                  {% endfor %}
+                </p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- space for any cta -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

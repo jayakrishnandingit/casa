@@ -3,8 +3,10 @@ from django.db import models
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.snippets.models import register_snippet
 
 
 # Create your models here.
@@ -32,6 +34,36 @@ class FileUpload(Timestamp):
         return '%s - %s' % (self.name, self.category)
 
 
+@register_snippet
+class SkillCategory(models.Model):
+    name = models.CharField(max_length=500, unique=True)
+
+    panels = [
+        FieldPanel('name')
+    ]
+
+    def __str__(self):
+        return self.name
+
+
+@register_snippet
+class Skills(models.Model):
+    category = models.ForeignKey(
+        SkillCategory,
+        on_delete=models.CASCADE,
+        related_name='skills'
+    )
+    name = models.CharField(max_length=500)
+
+    panels = [
+        SnippetChooserPanel('category'),
+        FieldPanel('name')
+    ]
+
+    def __str__(self):
+        return '%s - %s' % (self.name, self.category)
+
+
 class SocialMediaBtnBlock(blocks.StructBlock):
     text = blocks.CharBlock()
     link = blocks.URLBlock()
@@ -53,7 +85,13 @@ class HomePage(Page):
         ('cta', SocialMediaBtnBlock())
     ])
 
+    about_me = StreamField([
+        ('heading', blocks.CharBlock(classname="full title", default='')),
+        ('paragraph', blocks.RichTextBlock(default=''))
+    ])
+
     content_panels = Page.content_panels + [
         StreamFieldPanel('hero'),
-        StreamFieldPanel('social_media_cta')
+        StreamFieldPanel('social_media_cta'),
+        StreamFieldPanel('about_me')
     ]
