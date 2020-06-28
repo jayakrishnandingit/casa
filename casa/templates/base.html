@@ -1,5 +1,6 @@
 {% load static %}
-<!doctype html>
+{% load wagtailcore_tags %}
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/fontawesome/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/casa.css' %}">
 
-    <title>{% block title %}{% endblock %}Jayakrishnan Damodaran - Full-stack Python Developer</title>
+    <title>{% block title %}{{page.title}}{% endblock %}</title>
   </head>
   <body>
     {% block header %}

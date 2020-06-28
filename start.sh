@@ -1,6 +1,3 @@
-# create migrations based on model changes.
-python manage.py makemigrations
-
 # apply the migrations.
 python manage.py migrate
 
@@ -12,7 +9,7 @@ python manage.py createadmin
 
 # Start gunicorn server at port 8000 and keep an eye for app code changes.
 # If changes occur, kill worker and start a new one.
-gunicorn --reload \
+gunicorn --workers=3 \
     --bind 0.0.0.0:8000 \
     --access-logfile '-' \
     --error-logfile '-' \
