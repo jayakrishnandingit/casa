@@ -1,0 +1,30 @@
+{% load wagtailcore_tags %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card border-light">
+        <div id="about-me" class="card-body">
+          {% with heading=page.about_me.0 %}
+            <h5 class="card-title text-center">
+              {{heading.value}}
+            </h5>
+          {% endwith %}
+          {% with para=page.about_me.1 %}
+            <p class="card-text">
+              <div class="d-flex flex-row justify-content-around font-weight-lighter font-italic text-muted">
+                <div>Looking for&nbsp;<span class="badge badge-info">Full-time</span>&nbsp;jobs</div>
+                <div>Willing to relocate&nbsp;<span class="badge badge-info">Yes</span></div>
+              </div>
+            </p>
+            <p class="card-text">
+              {{para.value | richtext}}
+            </p>
+            <div class="text-center">
+              <!-- placeholder for CTA. -->
+            </div>
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

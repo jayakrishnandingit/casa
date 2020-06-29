@@ -1,14 +1,21 @@
+{% load wagtailcore_tags %}
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
             <div class="card border-light">
                 <div id="contact" class="card-body">
-                    <h5 class="card-title text-center">Contact</h5>
+                    <h5 class="card-title text-center">
+                        {% with heading=page.contact.0 %}
+                            {{heading.value}}
+                        {% endwith %}
+                    </h5>
                     <p class="card-text">
-                        I am excited to elaborate on how my proven skills and abilities will benefit your organization. I am available for a quick chat between <i>5:30pm and 7:00pm IST</i> throughout the week. Please contact me at <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a> to arrange for a convenient meeting time.
+                        {% with para=page.contact.1 %}
+                            {{para.value | richtext}}
+                        {% endwith %}
                     </p>
                     <div class="text-center">
-                        {% include "partials/_cta.html" %}
+                        <!-- placeholder for CTA. -->
                     </div>
                 </div>
             </div>

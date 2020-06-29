@@ -86,12 +86,18 @@ class HomePage(Page):
     ])
 
     about_me = StreamField([
-        ('heading', blocks.CharBlock(classname="full title", default='')),
+        ('heading', blocks.CharBlock(default='')),
+        ('paragraph', blocks.RichTextBlock(default=''))
+    ])
+
+    contact = StreamField([
+        ('heading', blocks.CharBlock(default='')),
         ('paragraph', blocks.RichTextBlock(default=''))
     ])
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('hero'),
         StreamFieldPanel('social_media_cta'),
-        StreamFieldPanel('about_me')
+        StreamFieldPanel('about_me'),
+        StreamFieldPanel('contact')
     ]

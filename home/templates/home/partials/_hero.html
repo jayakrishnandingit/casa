@@ -1,0 +1,25 @@
+{% load wagtailcore_tags %}
+<div class="container">
+    <div class="jumbotron p-4 p-md-5 rounded text-white bg-dark">
+        {% for block in page.hero %}
+            {% if block.block_type == 'heading' %}
+                <h1 class="display-4">{{ block.value }}</h1>
+            {% endif %}
+            {% if block.block_type == 'paragraph' %}
+                {{ block.value | richtext }}
+            {% endif %}
+        {% endfor %}
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="d-flex flex-row justify-content-around font-weight-lighter font-italic text-muted">
+                    {% for block in page.social_media_cta %}
+                        {% if block.block_type == 'cta' %}
+                            {% include_block block with btn_size="btn-lg" %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
