@@ -1,0 +1,23 @@
+{% load wagtailcore_tags %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card border-light">
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        {% with heading=page.portfolio.0 %}
+                            {{heading.value}}
+                        {% endwith %}
+                    </h5>
+                    <div class="row row-cols-1 row-cols-md-2">
+                        {% for block in page.portfolio %}
+                            {% if block.block_type == 'card' %}
+                                {% include_block block %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

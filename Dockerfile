@@ -42,10 +42,10 @@ ADD GeoLite2-Country_20190716.tar.gz geodata/
 
 # Copy the current directory contents into the container at /code/
 COPY manage.py .
+COPY activity activity/
 COPY start.sh .
 COPY casa casa/
 COPY home home/
-COPY activity activity/
 
 RUN useradd jay
 RUN chown -R jay /code

@@ -1,0 +1,30 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<div class="col mb-4">
+    <div class="card">
+        {% if value.app_image %}
+            {% image value.app_image original as tmp_photo %}
+            <img src="{{tmp_photo.url}}" class="card-img-top img-fluid" alt="{{value.app_name}}">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">
+                {{value.app_name}}
+            </h5>
+            <p class="card-text">
+                {{value.summary | richtext}}
+                <ul class="list-group list-group-flush">
+                    {% for item in value.achievements %}
+                        <li class="list-group-item">
+                            {{item}}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </p>
+            {% if value.app_url %}
+                <a href="{{value.app_url}}" target="_casa_{{value.app_name}}" class="btn btn-primary">
+                    Go to {{value.app_name | title}}&nbsp;<i class="fas fa-external-link-alt"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

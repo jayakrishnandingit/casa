@@ -3,9 +3,9 @@ from django.db import models
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
-from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.models import register_snippet
 
 
@@ -74,6 +74,17 @@ class SocialMediaBtnBlock(blocks.StructBlock):
         template = 'home/partials/blocks/_social_media.html'
 
 
+class PortfolioCardBlock(blocks.StructBlock):
+    app_name = blocks.CharBlock()
+    app_url = blocks.URLBlock(required=False)
+    app_image = ImageChooserBlock(required=False)
+    summary = blocks.RichTextBlock()
+    achievements = blocks.ListBlock(blocks.RichTextBlock(label='Achievement'))
+
+    class Meta:
+        template = 'home/partials/blocks/_portfolio_card.html'
+
+
 class HomePage(Page):
     hero = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
@@ -90,6 +101,11 @@ class HomePage(Page):
         ('paragraph', blocks.RichTextBlock(default=''))
     ])
 
+    portfolio = StreamField([
+        ('heading', blocks.CharBlock(default='Portfolio')),
+        ('card', PortfolioCardBlock())
+    ])
+
     contact = StreamField([
         ('heading', blocks.CharBlock(default='')),
         ('paragraph', blocks.RichTextBlock(default=''))
@@ -99,5 +115,6 @@ class HomePage(Page):
         StreamFieldPanel('hero'),
         StreamFieldPanel('social_media_cta'),
         StreamFieldPanel('about_me'),
+        StreamFieldPanel('portfolio'),
         StreamFieldPanel('contact')
     ]
