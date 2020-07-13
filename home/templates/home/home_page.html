@@ -1,10 +1,9 @@
 {% extends "base.html" %}
-{% load skills_tag %}
 
 {% block content %}
     {% include "home/partials/_hero.html" %}
     {% include "home/partials/_about.html" %}
-    {% skills %}
+    {% include "home/partials/_skills.html" %}
     {% include "home/partials/_portfolio.html" %}
     {% include "home/partials/_contact.html" %}
 {% endblock %}

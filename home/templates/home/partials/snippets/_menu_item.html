@@ -1,0 +1,5 @@
+{% for item in items %}
+	<li class="nav-item">
+      <a class="nav-link" tabindex="1" href="{{item.link}}">{{item.name}} <span class="sr-only">{{item.name}}</span></a>
+    </li>
+{% endfor %}

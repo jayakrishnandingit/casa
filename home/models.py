@@ -64,6 +64,27 @@ class Skills(models.Model):
         return '%s - %s' % (self.name, self.category)
 
 
+@register_snippet
+class MenuItem(models.Model):
+    name = models.CharField(max_length=200)
+    link = models.CharField(
+        max_length=1000,
+        null=True,
+        blank=True,
+        help_text="Where do you want this to take you to?"
+    )
+    position = models.IntegerField(default=1)
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('link'),
+        FieldPanel('position')
+    ]
+
+    def __str__(self):
+        return '%s' % self.name
+
+
 class SocialMediaBtnBlock(blocks.StructBlock):
     text = blocks.CharBlock()
     link = blocks.URLBlock()
