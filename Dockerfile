@@ -3,7 +3,10 @@ FROM python:3.7
 
 # Set environment varibles for build.
 ENV PYTHONUNBUFFERED 1
+# ENV DJANGO_ENV prod
 ENV DJANGO_ENV dev
+ENV DJANGO_SETTINGS_MODULE casa.settings.$DJANGO_ENV
+ENV AWS_STORAGE_BUCKET_NAME casa-$DJANGO_ENV-files
 
 RUN apt-get clean \
     && apt-get update -y \
