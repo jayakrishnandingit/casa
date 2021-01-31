@@ -1,9 +1,13 @@
 # Use an official Python runtime as a parent image
 FROM python:3.7
 
+# Define a build argument. Override using --build-arg DJANGO_ENV=prod. Default is dev.
+ARG DJANGO_ENV=dev
+
 # Set environment varibles for build.
 ENV PYTHONUNBUFFERED 1
-ENV DJANGO_ENV dev
+ENV DJANGO_SETTINGS_MODULE casa.settings.$DJANGO_ENV
+ENV AWS_STORAGE_BUCKET_NAME casa-$DJANGO_ENV-files
 
 RUN apt-get clean \
     && apt-get update -y \

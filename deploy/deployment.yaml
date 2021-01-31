@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: casa-web-deployment
+  labels:
+    app: casa_web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: casa_web
+  template:
+    metadata:
+      labels:
+        app: casa_web
+    spec:
+      containers:
+        - name: casa_web
+          image: jayakrishnandindocker/casa_web:$(RELEASE)
+          env:
+            - name: RELEASE
+              valueFrom:
+                configMapKeyRef:
+                  name: casa-web-configmap
+                  key: RELEASE
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: casa-web-configmap
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: casa-web-configmap
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: casa-web-configmap
+                  key: DB_NAME
+            - name: GITHUB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: casa-web-configmap
+                  key: GITHUB_URL
+            - name: LINKEDIN_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: casa-web-configmap
+                  key: LINKEDIN_URL
+            - name: MEDIUM_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: casa-web-configmap
+                  key: MEDIUM_URL
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: casa-web-secret
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: casa-web-secret
+                  key: DB_PASSWORD
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: casa-web-secret
+                  key: DJANGO_SECRET_KEY
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: casa-web-secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: casa-web-secret
+                  key: AWS_SECRET_ACCESS_KEY
+          ports:
+            - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: casa-web-service
+spec:
+  selector:
+    app: casa_web
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      nodePort: 30000

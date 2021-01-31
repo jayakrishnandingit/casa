@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: casa-web-configmap
+data:
+  RELEASE: v1.0.0
+  DB_HOST: casa-db-service
+  DB_PORT: 5432
+  DB_NAME: casa
+  GITHUB_URL: https://github.com/jayakrishnandingit
+  LINKEDIN_URL: https://www.linkedin.com/in/jayakrishnan-damodaran-35a65056/
+  MEDIUM_URL: https://medium.com/@jayakrishnandamodaran

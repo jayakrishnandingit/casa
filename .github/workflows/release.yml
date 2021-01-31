@@ -1,4 +1,4 @@
-name: Publish docker image.
+name: Release CI.
 
 on:
   release:
@@ -18,3 +18,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: jayakrishnandindocker/casa_web
           tag_with_ref: true
+          buildArgs: DJANGO_ENV=prod
